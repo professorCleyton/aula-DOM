@@ -25,8 +25,10 @@ function insereConvidadoNoHTML (convidado) {
 function exibeListaDeConvidados (lista) {
   // Percorrendo a lista pré-criada
   for (const convidado of lista) {
+    // Chamando a função para inserir o convidado no html
     insereConvidadoNoHTML(convidado)
-    console.log(convidado)
+    // Console para investigação
+    // console.log(convidado)
   }
 }
 
