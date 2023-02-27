@@ -9,7 +9,7 @@ let tabelaListaConvidados = document.getElementById('lista-convidados')
 
 /* Função que insere registro a registro de usuário na lista (dentro da tabela do HTML) */
 function insereConvidadoNoHTML (convidado) {
-// Inserindo no HTML da tabela
+  // Inserindo no HTML da tabela
   tabelaListaConvidados.innerHTML = `
     <tr>
         <td>${convidado}</td>
