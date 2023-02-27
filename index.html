@@ -38,10 +38,23 @@
         </p>
       </section>
       <!-- Form Cadastro -->
-      <section id="cadastramento-produtos" class="bg-light conteudo-secoes">
+      <section id="cadastramento-convidados" class="bg-light conteudo-secoes">
         <div class="row">
           <form action="#">
-            <div id="feedback-usuario" class="form-text" hidden></div>
+            <div
+              id="mensagem-usuario"
+              class="alert alert-success alert-dismissible fade show"
+              hidden
+              role="alert"
+            >
+              <strong>Boa!</strong> Convidado incluído na lista VIP!
+              <button
+                type="button"
+                class="btn-close"
+                aria-label="Close"
+                onclick="fechaDivMensagemUsuario()"
+              ></button>
+            </div>
             <div class="mb-3">
               <label for="nome-convidado" class="form-label"
                 >Nome do Convidado</label
