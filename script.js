@@ -26,46 +26,48 @@ function insereConvidadoNoHTML (convidado) {
     `
 }
 
-/* Função que vai exibir os usuários no HTML quando chamada 1.0 Quando eu não manjo do foreach*/
-function exibeListaDeConvidados (lista) {
-  // Dando descarga no meu vaso
-  tabelaListaConvidados.innerHTML = ''
-  // Percorrendo a lista pré-criada
-  for (const convidado of lista) {
-    // Chamando a função para inserir o convidado no html
-    insereConvidadoNoHTML(convidado)
-    // Console para investigação
-    // console.log(convidado)
-  }
-}
-
-/* Usando foreach para percorrer um array */ 
+/* Usando foreach para percorrer um array */
 function exibeListaDeConvidadosV2 () {
-    // Limpo a tabela HTML
-    tabelaListaConvidados.innerHTML = ''
-    // Percorro o array inserindo cada posição em um elemento do HTML (TR) na table
-    listaDeConvidados.forEach(convidado => insereConvidadoNoHTML(convidado))
+  // Limpo a tabela HTML
+  tabelaListaConvidados.innerHTML = ''
+  // Percorro o array inserindo cada posição em um elemento do HTML (TR) na table
+  listaDeConvidados.forEach(convidado => insereConvidadoNoHTML(convidado))
 }
 
 /* Setando um atributo para esconder*/
-function fechaDivMensagemUsuario(){
-    divMensagemUsuario.setAttribute('hidden','')
+function fechaDivMensagemUsuario () {
+  divMensagemUsuario.setAttribute('hidden', '')
+}
+
+// Exibir uma mensagem de resposta ao usuário quando ele clicar no botao incluir
+function exibirMensagemUsuario (sucesso = true, mensagem = 'Resposta com sucesso'
+) {
+  let classeAtual = divMensagemUsuario.getAttribute('class')
+  classeAtual = sucesso ? 
+                classeAtual.replace('alert-danger','alert-success') 
+                : classeAtual.replace('alert-success','alert-danger') 
+
+  divMensagemUsuario.setAttribute('class',classeAtual)
+  divMensagemUsuario.innerHTML = `  ${mensagem}
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        aria-label="Close"
+                                        onclick="fechaDivMensagemUsuario()"
+                                    ></button>`
+  divMensagemUsuario.removeAttribute('hidden')
 }
 
 exibeListaDeConvidadosV2(listaDeConvidados)
 
 /* Escutando o evento de click para disparar uma função quando ele acontecer */
-botaoIncluirConvidado.onclick = function(){
-    if(inputNomeConvidado.value.trim()){
-        listaDeConvidados.push(inputNomeConvidado.value)
-        exibeListaDeConvidadosV2(listaDeConvidados)
-        inputNomeConvidado.value = ''
-        divMensagemUsuario.removeAttribute('hidden')
-        // Confiro se to fazendo cagada ou não
-        console.log(listaDeConvidados)
-    }else{
-        // Exemplo de getAttribute
-        console.log(divMensagemUsuario.getAttribute('class'))
-    }
-    console.log('A treta ta on!')
+botaoIncluirConvidado.onclick = function () {
+  if (inputNomeConvidado.value.trim()) {
+    listaDeConvidados.push(inputNomeConvidado.value)
+    exibeListaDeConvidadosV2(listaDeConvidados)
+    exibirMensagemUsuario(true,'Convidado incluído na lista!')
+    inputNomeConvidado.value = ''
+  } else {
+    exibirMensagemUsuario(false,'O nome do convidado precisa ser preenchido!')
+  }
 }
